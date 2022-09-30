@@ -7,6 +7,6 @@ export const AppWrapper = styled.div`
   flex-direction: column;
   font-size: 30px;
   gap: 25px;
-  padding-top: 30px;
+  padding-top: 18px;
   color: #010101;
 `;

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import { nanoid } from 'nanoid';
+import { nanoid } from 'nanoid';
 
 import { ContactForm } from 'components/ContactForm/ContactForm';
 import { Filter } from 'components/Filter/Filter';
@@ -7,39 +7,67 @@ import { ContactList } from 'components/ContactList/ContactList';
 
 import { AppWrapper } from './App.styled';
 
-// const id = nanoid(5);
-
 export class App extends Component {
   state = {
-    contacts: [],
-    name: '',
+    contacts: [
+      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
+      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
+      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
+      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
+    ],
+    filter: '',
   };
 
-  // handleChange = e => {
-  //   const { name, value } = e.target;
-  //   this.setState({ [name]: value });
-  // };
+  addContact = ({ name, number }) => {
+    const { contacts } = this.state;
 
-  // handleSubmit = e => {
-  //   e.preventDefault();
-  //   const { contacts, name, password } = this.state;
-  //   this.props.onSubmit({ ...this.state });
-  //   this.reset();
-  // };
+    const addContact = {
+      id: nanoid(5),
+      name,
+      number,
+    };
 
-  // reset = () => {
-  //   this.setState({ ...state });
-  // };
+    if (
+      contacts.find(
+        contact => contact.name.toLowerCase() === addContact.name.toLowerCase()
+      )
+    ) {
+      return alert(`${addContact.name} is already in contacts.`);
+    }
+
+    this.setState(({ contacts }) => ({
+      contacts: [addContact, ...contacts],
+    }));
+  };
+
+  deletContact = idContact => {
+    this.setState(({ contacts }) => ({
+      contacts: contacts.filter(contact => contact.id !== idContact),
+    }));
+  };
+
+  filretContacts = e => {
+    this.setState({ filter: e.currentTarget.value });
+  };
 
   render() {
+    const { filter } = this.state;
+    const normalized = this.state.filter.toLocaleLowerCase();
+    const renderContacts = this.state.contacts.filter(contact =>
+      contact.name.toLocaleLowerCase().includes(normalized)
+    );
+
     return (
       <AppWrapper>
         <h1>Phonebook</h1>
-        <ContactForm />
+        <ContactForm onSubmit={this.addContact} />
 
         <h2>Contacts</h2>
-        <Filter />
-        <ContactList />
+        <Filter value={filter} onFilretContacts={this.filretContacts} />
+        <ContactList
+          contacts={renderContacts}
+          onDeletContact={this.deletContact}
+        />
       </AppWrapper>
     );
   }
