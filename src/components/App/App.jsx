@@ -5,7 +5,7 @@ import { ContactForm } from 'components/ContactForm/ContactForm';
 import { Filter } from 'components/Filter/Filter';
 import { ContactList } from 'components/ContactList/ContactList';
 
-import { AppWrapper } from './App.styled';
+import { AppWrapper, Title, TitleContacts } from './App.styled';
 
 export class App extends Component {
   state = {
@@ -59,10 +59,10 @@ export class App extends Component {
 
     return (
       <AppWrapper>
-        <h1>Phonebook</h1>
+        <Title>Phonebook</Title>
         <ContactForm onSubmit={this.addContact} />
 
-        <h2>Contacts</h2>
+        <TitleContacts>Contacts</TitleContacts>
         <Filter value={filter} onFilretContacts={this.filretContacts} />
         <ContactList
           contacts={renderContacts}

@@ -1,22 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { MdOutlineDeleteForever } from 'react-icons/md';
+import { BsTelephone } from 'react-icons/bs';
+import { List, Item, Button } from './ContactList.styled';
 
 // import { Button } from './FeedbackOptions.styled';
 
 export const ContactList = ({ contacts, onDeletContact }) => {
   return (
-    <ul>
+    <List>
       {contacts.map(({ id, name, number }) => (
-        <li key={id}>
+        <Item key={id}>
           <p>
-            {name}, {number}
+            <BsTelephone size={24} color={'blue'} /> {name}: {number}
           </p>
-          <button type="button" onClick={() => onDeletContact(id)}>
-            Delet
-          </button>
-        </li>
+          <Button type="button" onClick={() => onDeletContact(id)}>
+            <MdOutlineDeleteForever size={24} color={'blue'} />
+          </Button>
+        </Item>
       ))}
-    </ul>
+    </List>
   );
 };
 

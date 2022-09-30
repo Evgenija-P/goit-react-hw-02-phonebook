@@ -1,8 +1,9 @@
 /* eslint-disable no-unused-expressions */
 import React, { Component } from 'react';
 import { nanoid } from 'nanoid';
+import { AiOutlineUserAdd } from 'react-icons/ai';
 
-import { Form } from './ContactForm.styled';
+import { Form, Label, Input, Button } from './ContactForm.styled';
 
 const DEFAULT_STATE = {
   name: '',
@@ -39,29 +40,33 @@ export class ContactForm extends Component {
     return (
       <>
         <Form onSubmit={this.handleSubmit}>
-          <label htmlFor={nameId}>Name</label>
-          <input
+          <Label htmlFor={nameId}>Name</Label>
+          <Input
             type="text"
             name="name"
             value={name}
             id={nameId}
+            placeholder="Name"
             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
             title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
             required
             onChange={this.handleChange}
           />
-          <label htmlFor={numberId}>Number</label>
-          <input
+          <Label htmlFor={numberId}>Number</Label>
+          <Input
             type="tel"
             name="number"
             value={number}
             id={numberId}
+            placeholder="Number"
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
             required
             onChange={this.handleChange}
           />
-          <button type="submit">Add Contact</button>
+          <Button type="submit">
+            <AiOutlineUserAdd size={24} color={'blue'} />
+          </Button>
         </Form>
       </>
     );
