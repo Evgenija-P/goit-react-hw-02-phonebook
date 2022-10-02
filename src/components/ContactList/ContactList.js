@@ -4,8 +4,6 @@ import { MdOutlineDeleteForever } from 'react-icons/md';
 import { BsTelephone } from 'react-icons/bs';
 import { List, Item, Button } from './ContactList.styled';
 
-// import { Button } from './FeedbackOptions.styled';
-
 export const ContactList = ({ contacts, onDeletContact }) => {
   return (
     <List>
@@ -24,6 +22,12 @@ export const ContactList = ({ contacts, onDeletContact }) => {
 };
 
 ContactList.propTypes = {
-  contacts: PropTypes.array.isRequired,
+  contacts: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      number: PropTypes.string.isRequired,
+    })
+  ),
   onDeletContact: PropTypes.func.isRequired,
 };

@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-expressions */
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { nanoid } from 'nanoid';
 import { AiOutlineUserAdd } from 'react-icons/ai';
 
@@ -72,3 +73,7 @@ export class ContactForm extends Component {
     );
   }
 }
+
+ContactForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};
